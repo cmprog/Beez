@@ -14,12 +14,17 @@ public sealed class UpgradeState
                     new UpgradeEffectDefinition
                     {
                         AttributeKey = AttributeKeys.BeeSpeed,
-                        Bonus = new AttributeBonus(0.5)
+                        Bonus = new AttributeBonus(0.1)
                     },
                     new UpgradeEffectDefinition
                     {
                         AttributeKey = AttributeKeys.BeeTurn,
                         Bonus = new AttributeBonus(5.0)
+                    },
+                    new UpgradeEffectDefinition
+                    {
+                        AttributeKey = AttributeKeys.PollenCapacity,
+                        Bonus = new AttributeBonus(25)
                     }
                 },
             },
@@ -32,7 +37,7 @@ public sealed class UpgradeState
                     new UpgradeEffectDefinition
                     {
                         AttributeKey = AttributeKeys.BeeSpeed,
-                        Bonus = new AttributeBonus(0.5)
+                        Bonus = new AttributeBonus(0.1)
                     },
                     new UpgradeEffectDefinition
                     {
@@ -42,7 +47,7 @@ public sealed class UpgradeState
                     new UpgradeEffectDefinition
                     {
                         AttributeKey = AttributeKeys.PollenCapacity,
-                        Bonus = new AttributeBonus(5.0)
+                        Bonus = new AttributeBonus(20.0)
                     }
                 },
             },
