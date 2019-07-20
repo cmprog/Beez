@@ -29,7 +29,7 @@ public sealed class UpgradeState
                 },
             },
             new UpgradeDefinition {
-                Name = "Bee 1",
+                Name = "Bee 2",
                 Description = "[TODO]",
                 Cost = 1.0,
                 Effects = new List<UpgradeEffectDefinition>
@@ -117,9 +117,12 @@ public sealed class UpgradeState
         var lDefinition = this.NextUpgradeForDefinition(category);
         if (lDefinition == null) return false;
 
-        if (lDefinition.Cost > gameState.Hive.HoneyAmount) return false;
+        var lAvailableHoney = gameState.Statistics.GetDouble(StatisticKeys.HoneyAvailable);
 
-        gameState.Hive.HoneyAmount -= lDefinition.Cost;
+        if (lDefinition.Cost > lAvailableHoney) return false;
+
+        gameState.Statistics.Decrement(StatisticKeys.HoneyAvailable, lDefinition.Cost);
+
         foreach (var lEffect in lDefinition.Effects)
         {
             var lAttribute = gameState.Attributes.Get(lEffect.AttributeKey);

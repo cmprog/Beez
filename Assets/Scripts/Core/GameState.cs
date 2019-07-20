@@ -19,26 +19,22 @@ public sealed class GameState
 
     public StatisticsSet Statistics { get; private set; }
 
-    public DayFinalizationResult FinializeDay(DaySummaryInput input)
+    public void FinializeDay(StatisticsSet dayStats)
     {
         this.Statistics.Increment(StatisticKeys.TotalDays);
 
-        var lSalvagedPollen = input.RemainingBeePollen * this.Attributes.GetDouble(AttributeKeys.SalvageRate);
-        var lTotalCollectedPollen = input.CollectedPollen += lSalvagedPollen;
-        this.Hive.PollenAmount += lTotalCollectedPollen;
+        var lRemainingPollen = dayStats.GetDouble(StatisticKeys.RemainingPollen);
+        var lCollectedPollen = dayStats.GetDouble(StatisticKeys.PollenCollected);
+        
+        var lSalvagedPollen = lRemainingPollen * this.Attributes.GetDouble(AttributeKeys.SalvageRate);
+        var lTotalCollectedPollen = lCollectedPollen += lSalvagedPollen;        
+        this.Statistics.Increment(StatisticKeys.RemainingPollen, lTotalCollectedPollen);
 
-        var lHoneyGenerationResult = this.Hive.GenerateHoney();
-        this.Statistics.Increment(StatisticKeys.TotalHoneyBatches, lHoneyGenerationResult.BatchesProcessed);
-        this.Statistics.Increment(StatisticKeys.TotalHoneyGenerated, lHoneyGenerationResult.HoneyGenerated);
-                
-        var lResult = new DayFinalizationResult();
-        lResult.DayNumber = this.Statistics.GetInt32(StatisticKeys.TotalDays);
-        lResult.CollectedPollen = input.CollectedPollen;
-        lResult.SalvagedPollen = lSalvagedPollen;
-        lResult.BatchesProcessed = lHoneyGenerationResult.BatchesProcessed;
-        lResult.PollenUsed = lHoneyGenerationResult.PollenUsed;
-        lResult.GeneratedHoney = lHoneyGenerationResult.HoneyGenerated;
-        return lResult;        
+        var lHoneyGenStats = this.Hive.GenerateHoney(this.Statistics, this.Attributes);
+        this.Statistics.IncrementFrom(lHoneyGenStats);
+
+        dayStats.SetFrom(lHoneyGenStats);
+        dayStats.Set(StatisticKeys.SalvagedPollen, lSalvagedPollen);
     }
 
     public static GameState CreateNew()
@@ -48,7 +44,7 @@ public sealed class GameState
         lGameState.Attributes = new AttributeSet();
         lGameState.World = WorldState.CreateNew(lGameState.Seed);
         lGameState.Hive = HiveState.CreateNew();
-        lGameState.Statistics = StatisticsSet.CreateNew();
+        lGameState.Statistics = StatisticsSet.CreateDefault();
         lGameState.Upgrades = UpgradeState.CreateNew();
         return lGameState;
     }

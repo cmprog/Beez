@@ -1,5 +1,11 @@
 ﻿public static class StatisticKeys
 {
+    public static string RemainingPollen { get; } = "Pollen.Remaining";
+
+    public static string SalvagedPollen { get; } = "Pollen.Salvaged";
+
+    public static string HiveDropOffCount { get; } = "Hive.DropOffCount";
+
     /// <summary>
     /// The number of physical pollen collistions the player has performed.
     /// </summary>
@@ -8,16 +14,20 @@
     /// <summary>
     /// The total value of pollen collected by the player.
     /// </summary>
-    public static string TotalPollenCollected { get; } = "Pollen.TotalValue";
+    public static string PollenCollected { get; } = "Pollen.TotalValue";
+
+    public static string PollenProcessed { get; } = "Pollen.Processed";
 
     /// <summary>
     /// The number of total flower collections the player has performed.
     /// </summary>
     public static string TotalFlowersCollected { get; } = "Flower.BonusCount";
 
-    public static string TotalHoneyBatches { get; } = "Honey.BatchCount";
+    public static string HoneyBatchCount { get; } = "Honey.BatchCount";
 
-    public static string TotalHoneyGenerated { get; } = "Honey.TotalValue";
+    public static string HoneyProduced { get; } = "Honey.TotalValue";
+
+    public static string HoneyAvailable { get; } = "Honey.Available";
 
     /// <summary>
     /// The total number of ellapsed days.

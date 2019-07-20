@@ -9,6 +9,8 @@ TagManager:
   - Hive
   - Canvas
   - ObjectPools.Flower
+  - FormField.Header
+  - FormField.Value
   layers:
   - Default
   - TransparentFX
