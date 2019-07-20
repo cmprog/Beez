@@ -1,0 +1,8 @@
+{
+  "player": {
+    "forwardSpeed": 0,
+    "turnSpeed": 0,
+    "pollenCapacity": 0,
+
+  }
+}
