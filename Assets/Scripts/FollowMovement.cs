@@ -9,11 +9,6 @@ public sealed class FollowMovement : MonoBehaviour
 
     public float minTurnThreshold;
 
-    public float actualTurn;
-    public float targetAngleDeg;
-    public float targetAngleDegOffset;
-
-
     private void FixedUpdate()
     {
         var lTargetOffset = this.target.transform.position - this.transform.localPosition;
@@ -22,10 +17,6 @@ public sealed class FollowMovement : MonoBehaviour
 
         var lOffsetDeg = Mathf.DeltaAngle(this.transform.rotation.eulerAngles.z, lTargetAngleDeg);
         
-        this.actualTurn = 0;
-        this.targetAngleDeg = lTargetAngleDeg;
-        this.targetAngleDegOffset = lOffsetDeg;
-
         if (Mathf.Abs(lOffsetDeg) >= this.minTurnThreshold)
         {
             var lActualTurn = this.turn;
@@ -33,8 +24,6 @@ public sealed class FollowMovement : MonoBehaviour
             {
                 lActualTurn = -this.turn;
             }
-
-            this.actualTurn = lActualTurn;
 
             this.transform.Rotate(0, 0, lActualTurn);
         }
