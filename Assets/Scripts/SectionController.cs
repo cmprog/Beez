@@ -9,6 +9,10 @@ public class SectionController : MonoBehaviour
     private ObjectPool mPollenPool;
     private ObjectPool mFlowerPool;
     private WorldState mWorldState;
+    private SpriteRenderer mSpriteRenderer;
+
+    public Color evenColor;
+    public Color oddColor;
 
     public Vector2Int basePosition;
 
@@ -25,6 +29,9 @@ public class SectionController : MonoBehaviour
 
         this.currentVirtualPosition = this.basePosition;
         this.previousVirtualPosition = this.basePosition;
+
+        this.mSpriteRenderer = this.GetComponent<SpriteRenderer>();
+        this.mSpriteRenderer.color = this.GetColor();
 
         this.mPollenPool = this.GetObjectPool(GameObjectTags.ObjectPools.Pollen);
         this.mFlowerPool = this.GetObjectPool(GameObjectTags.ObjectPools.Flower);
@@ -157,8 +164,16 @@ public class SectionController : MonoBehaviour
             this.currentVirtualPosition.y += yVirtualPositionOffset;
             this.transform.Translate(xTranslate, yTranslate, 0.0f);
 
+            this.mSpriteRenderer.color = this.GetColor();
+
             this.ReleaseAll();
             this.PopulateSection();
         }
+    }
+
+    private Color GetColor()
+    {
+        var lValue = this.currentVirtualPosition.x + this.currentVirtualPosition.y;
+        return ((lValue % 2) == 0) ? this.evenColor : this.oddColor;
     }
 }

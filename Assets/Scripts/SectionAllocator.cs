@@ -4,8 +4,8 @@ public class SectionAllocator : MonoBehaviour
 {
     public GameObject template;
 
-    public Color color;
-    public Color altColor;
+    public Color evenColor;
+    public Color oddColor;
 
     private void Start()
     {
@@ -13,15 +13,16 @@ public class SectionAllocator : MonoBehaviour
         {
             for (var c = -1; c <= 1; c++)
             {
-                var section = Instantiate(this.template, this.transform);
+                var section = Instantiate(this.template);
                 section.name = string.Format("Section ({0}, {1})", r, c);
-                section.transform.Translate(c * section.transform.localScale.x, r * section.transform.localScale.y, 0);
-                
-                var reposition = section.GetComponent<SectionController>();
-                reposition.basePosition = new Vector2Int(c, r);
+                                
+                var lSectionController = section.GetComponent<SectionController>();       
+                lSectionController.basePosition = new Vector2Int(c, r);
+                lSectionController.evenColor = this.evenColor;
+                lSectionController.oddColor = this.oddColor;
 
-                var renderer = section.GetComponent<SpriteRenderer>();
-                renderer.color = ((r + c) % 2 == 0) ? this.color : this.altColor;
+                section.transform.SetParent(this.transform, false);
+                section.transform.Translate(c * section.transform.localScale.x, r * section.transform.localScale.y, 0);
             }
         }
     }

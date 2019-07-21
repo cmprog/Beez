@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using UnityEngine;
 
 public sealed class GameState
 {
@@ -40,7 +41,16 @@ public sealed class GameState
     public static GameState CreateNew()
     {
         var lGameState = new GameState();
-        lGameState.Seed = 42; // UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+
+        if (Debug.isDebugBuild)
+        {
+            lGameState.Seed = 42;
+        }
+        else
+        {
+            lGameState.Seed = Random.Range(int.MinValue, int.MaxValue);
+        }
+
         lGameState.Attributes = new AttributeSet();
         lGameState.World = WorldState.CreateNew(lGameState.Seed);
         lGameState.Hive = HiveState.CreateNew();

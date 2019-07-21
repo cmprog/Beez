@@ -1457,8 +1457,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   template: {fileID: 3101089699003733358, guid: 20910f966f893be4e9e1bb35a682c519,
     type: 3}
-  color: {r: 0, g: 0.5019608, b: 0, a: 1}
-  altColor: {r: 0, g: 0.76862746, b: 0, a: 1}
+  evenColor: {r: 0, g: 0.76862746, b: 0, a: 1}
+  oddColor: {r: 0, g: 0.5019608, b: 0, a: 1}
 --- !u!1 &958166765
 GameObject:
   m_ObjectHideFlags: 0
