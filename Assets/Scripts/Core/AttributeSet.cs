@@ -18,6 +18,8 @@ public sealed class AttributeSet
         this.mAttributesByKey.Add(AttributeKeys.PollenValue, new PlayerAttribute(1.0));
         this.mAttributesByKey.Add(AttributeKeys.PollenRegen, new PlayerAttribute(0.0));
         this.mAttributesByKey.Add(AttributeKeys.FlowerBonus, new PlayerAttribute(0.1));
+        this.mAttributesByKey.Add(AttributeKeys.EnemySpawnRateMax, new PlayerAttribute(2.0));
+        this.mAttributesByKey.Add(AttributeKeys.EnemySpawnRateMin, new PlayerAttribute(3.0));
     }
 
     public PlayerAttribute Get(string key)

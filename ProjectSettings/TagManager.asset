@@ -11,6 +11,8 @@ TagManager:
   - ObjectPools.Flower
   - FormField.Header
   - FormField.Value
+  - ObjectPools.Enemy
+  - Bug
   layers:
   - Default
   - TransparentFX

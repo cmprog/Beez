@@ -16,6 +16,8 @@ public sealed class GameState
 
     public HiveState Hive { get; private set; }
 
+    public DayManager DayManager { get; private set; }
+
     public UpgradeState Upgrades { get; private set; }
 
     public StatisticsSet Statistics { get; private set; }
@@ -36,6 +38,13 @@ public sealed class GameState
 
         dayStats.SetFrom(lHoneyGenStats);
         dayStats.Set(StatisticKeys.SalvagedPollen, lSalvagedPollen);
+        this.ChangeDayManager();
+    }
+
+    private void ChangeDayManager()
+    {
+        var lNextDayIndex = this.Statistics.GetInt32(StatisticKeys.TotalDays);
+        this.DayManager = new DayManager(this.Attributes, this.Seed, lNextDayIndex);
     }
 
     public static GameState CreateNew()
@@ -56,6 +65,7 @@ public sealed class GameState
         lGameState.Hive = HiveState.CreateNew();
         lGameState.Statistics = StatisticsSet.CreateDefault();
         lGameState.Upgrades = UpgradeState.CreateNew();
+        lGameState.ChangeDayManager();
         return lGameState;
     }
 

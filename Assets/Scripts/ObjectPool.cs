@@ -66,4 +66,15 @@ public class ObjectPool : MonoBehaviour
             this.mAvailableObjs.Add(obj);
         }
     }
+
+    public static ObjectPool FindEnemyObjectPool()
+    {
+        return FindByTag(GameObjectTags.ObjectPools.Enemy);
+    }
+
+    public static ObjectPool FindByTag(string tag)
+    {
+        var lGameObject = GameObject.FindGameObjectWithTag(tag);
+        return lGameObject.GetComponent<ObjectPool>();
+    }
 }

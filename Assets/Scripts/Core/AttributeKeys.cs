@@ -19,4 +19,8 @@
     public static string PollenRegen { get; } = "Flower.PollenRegen";
 
     public static string FlowerBonus { get; } = "Flower.PollenBonus";
+
+    public static string EnemySpawnRateMin { get; } = "Enemy.SpawnRate.Min";
+
+    public static string EnemySpawnRateMax { get; } = "Enemy.SpawnRate.Max";
 }
